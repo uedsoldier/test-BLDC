@@ -1,0 +1,70 @@
+{
+    "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "tb_select",
+            "type": "pickString",
+            "description": "Select a testbench to run",
+            "options": [
+                "tb_hello",
+                "tb_pwm_generator",
+                "tb_bldc_commutator"
+
+            ]
+        },
+        {
+            "id": "main_clock_frequency_MHz",
+            "type": "promptString",
+            "description": "Enter the main clock frequency in MHz.",
+            "default": "100"
+        },
+        {
+            "id": "pwm_duty_cycle",
+            "type": "promptString",
+            "description": "Enter PWM duty cycle in cycles.",
+            "default": "50",
+        },
+        {
+            "id": "pwm_period",
+            "type": "promptString",
+            "description": "Enter PWM period in cycles.",
+            "default": "100", 
+        }
+    ],
+    "tasks": [
+        {
+            "label": "compile-testbench",
+            "type": "shell",
+            "command": "iverilog",
+            "args": [
+                "-o", "${workspaceFolder}/sim/${input:tb_select}.vvp",
+                "-I", "${workspaceFolder}/src", "${workspaceFolder}/testbenches/${input:tb_select}.v",
+            ],
+            "problemMatcher": []
+        },
+        {
+        "label": "simulate-testbench",
+        "type": "shell",
+        "dependsOn": ["compile-testbench"],
+        "command": "vvp",
+        "args": [
+            "${workspaceFolder}/sim/${input:tb_select}.vvp"
+        ],
+        "problemMatcher": []
+        },
+        {
+        "label": "graph-testbench",
+        "type": "shell",
+        "dependsOn": ["simulate-testbench"],
+        "command": "cmd.exe",
+        "args": [
+            "/C",
+            "start",
+            "\"\"",
+            "gtkwave",
+            "${workspaceFolder}/sim_output/${input:tb_select}.vcd"
+        ],
+        "problemMatcher": []
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "VsCodeTaskButton.showCounter": true,
+    "VsCodeTaskButtons.tasks" : [
+        {
+            "label": "Compile testbench",
+            "alignment": "left",
+            "task": "compile-testbench",
+            "tooltip": "Compile the selected testbench with iverilog",
+            "description": "Compiles the selected testbench using iverilog.",
+            "color": "warning"
+        },
+        {
+            "label": "Simulate testbench",
+            "alignment": "left",
+            "task": "simulate-testbench",
+            "tooltip": "Simulate the selected testbench with vvp",
+            "description": "Simulates the selected testbench using vvp.",
+            "color": "error"
+        },
+        {
+            "label": "Graph testbench",
+            "alignment": "left",
+            "task": "graph-testbench",
+            "tooltip": "Graph the selected testbench with gtkwave",
+            "description": "Graphs the selected testbench using gtkwave.",
+            "color": "default"
+        }
+    ]
+    }

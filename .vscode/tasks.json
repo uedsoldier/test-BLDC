@@ -142,6 +142,42 @@
             "${workspaceFolder}/sim_output/tb_bldc_pwm.vcd"
         ],
         "problemMatcher": []
-        }
+        },
+
+        // BLDC with PWM and Hall tasks
+        {
+            "label": "compile-bldc-pwm-hall-tb",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "${workspaceFolder}/scripts/bldc_pwm_hall_build.py",
+                "tb_bldc_pwm_commutator",
+            ],
+            "problemMatcher": []
+        },
+        {
+        "label": "simulate-bldc-pwm-hall-tb",
+        "type": "shell",
+        "dependsOn": ["compile-bldc-pwm-hall-tb"],
+        "command": "vvp",
+        "args": [
+            "${workspaceFolder}/sim/tb_bldc_pwm_hall.vvp"    
+        ], 
+        "problemMatcher": []
+        },
+        {   
+        "label": "graph-bldc-pwm-hall-tb",
+        "type": "shell",
+        "dependsOn": ["simulate-bldc-pwm-hall-tb"],
+        "command": "cmd.exe",
+        "args": [
+            "/C",
+            "start",
+            "\"\"",
+            "gtkwave",
+            "${workspaceFolder}/sim_output/tb_bldc_pwm_hall.vcd"
+        ],
+        "problemMatcher": []
+        },
     ]
 }

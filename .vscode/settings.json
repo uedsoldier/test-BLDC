@@ -32,6 +32,14 @@
             "tooltip": "Performs the BLDC with PWM testbench.",
             "description": "Performs the BLDC with PWM testbench.",
             "color": "default"
+        },
+        {
+            "label": "📊 BLDC with PWM and Hall testbench",
+            "alignment": "left",
+            "task": "graph-bldc-pwm-hall-tb",
+            "tooltip": "Performs the BLDC with PWM and Hall testbench.",
+            "description": "Performs the BLDC with PWM and Hall testbench.",
+            "color": "default"
         }
     ]
     }

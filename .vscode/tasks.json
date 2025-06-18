@@ -106,6 +106,42 @@
             "${workspaceFolder}/sim_output/tb_bldc_commutator.vcd"
         ],
         "problemMatcher": []
+        },
+
+        // BLDC with PWM tasks
+        {
+            "label": "compile-bldc-pwm-tb",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "${workspaceFolder}/scripts/bldc_pwm_build.py",
+                "tb_bldc_pwm_commutator",
+            ],
+            "problemMatcher": []
+        },
+        {
+        "label": "simulate-bldc-pwm-tb",
+        "type": "shell",
+        "dependsOn": ["compile-bldc-pwm-tb"],
+        "command": "vvp",
+        "args": [
+            "${workspaceFolder}/sim/tb_bldc_pwm.vvp"    
+        ], 
+        "problemMatcher": []
+        },
+        {   
+        "label": "graph-bldc-pwm-tb",
+        "type": "shell",
+        "dependsOn": ["simulate-bldc-pwm-tb"],
+        "command": "cmd.exe",
+        "args": [
+            "/C",
+            "start",
+            "\"\"",
+            "gtkwave",
+            "${workspaceFolder}/sim_output/tb_bldc_pwm.vcd"
+        ],
+        "problemMatcher": []
         }
     ]
 }

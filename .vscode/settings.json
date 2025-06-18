@@ -1,5 +1,4 @@
 {
-    "VsCodeTaskButton.showCounter": true,
     "VsCodeTaskButtons.tasks" : [
 
         {
@@ -26,5 +25,13 @@
             "description": "Performs BLDC open-loop testbench.",
             "color": "default"
         },
+        {
+            "label": "📊 BLDC with PWM testbench",
+            "alignment": "left",
+            "task": "graph-bldc-pwm-tb",
+            "tooltip": "Performs the BLDC with PWM testbench.",
+            "description": "Performs the BLDC with PWM testbench.",
+            "color": "default"
+        }
     ]
     }

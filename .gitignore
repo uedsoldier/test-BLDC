@@ -1,2 +1,5 @@
 sim/*.*
 sim_output/*.*
+sim_output/*.*
+!sim_output/.gitkeep
+__pycache__/

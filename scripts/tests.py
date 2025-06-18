@@ -37,7 +37,7 @@ class PWMTest(BaseTest):
         self.pwm_freq_hz = int(input('Enter PWM frequency [Hz]: '))
         self.pwm_period = self.clk_freq_hz // self.pwm_freq_hz
         print('PWM parameters:')
-        print('\tFrequency: {self.pwm_freq_hz} [Hz]')
+        print(f'\tFrequency: {self.pwm_freq_hz} [Hz]')
         print(f'\tPeriod: {self.pwm_period} [cycles] ({self.pwm_period*self.clk_period_ns} [ns])')
 
         self.duty_a = int(input(f'Enter duty cycle A (0-{self.pwm_period}): '))
@@ -103,7 +103,7 @@ class BLDCPWMTest(BaseTest):
         self.pwm_freq_hz = int(input('Enter PWM frequency [Hz]: '))
         self.pwm_period = self.clk_freq_hz // self.pwm_freq_hz
         print('PWM parameters:')
-        print('\tFrequency: {self.pwm_freq_hz} [Hz]')
+        print(f'\tFrequency: {self.pwm_freq_hz} [Hz]')
         print(f'\tPeriod: {self.pwm_period} [cycles] ({self.pwm_period*self.clk_period_ns} [ns])')
 
         # All duty cycles must be the same for BLDC PWM

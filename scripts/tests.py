@@ -30,7 +30,6 @@ class BaseTest:
         print(' '.join(self.iverilog_cmd))
         self.verilog_cmd()
 
-    
 class PWMTest(BaseTest):
     def __init__(self,tb_name):
         super().__init__(tb_name)
@@ -41,9 +40,12 @@ class PWMTest(BaseTest):
         print('\tFrequency: {self.pwm_freq_hz} [Hz]')
         print(f'\tPeriod: {self.pwm_period} [cycles] ({self.pwm_period*self.clk_period_ns} [ns])')
 
-        self.duty_a = int(input('Enter duty cycle A (0-PWM period): '))
-        self.duty_b = int(input('Enter duty cycle B (0-PWM period): '))
-        self.duty_c = int(input('Enter duty cycle C (0-PWM period): '))
+        self.duty_a = int(input(f'Enter duty cycle A (0-{self.pwm_period}): '))
+        self.duty_b = int(input(f'Enter duty cycle B (0-{self.pwm_period}): '))
+        self.duty_c = int(input(f'Enter duty cycle C (0-{self.pwm_period}): '))
+
+        if any(duty < 0 or duty >= self.pwm_period for duty in (self.duty_a, self.duty_b, self.duty_c)):
+            raise ValueError(f'Duty cycles must be in the range [0, {self.pwm_period})')
 
         self.iverilog_cmd = [
             'iverilog',
@@ -105,8 +107,9 @@ class BLDCPWMTest(BaseTest):
         print(f'\tPeriod: {self.pwm_period} [cycles] ({self.pwm_period*self.clk_period_ns} [ns])')
 
         # All duty cycles must be the same for BLDC PWM
-        self.duty = int(input('Enter duty cycle (0-PWM period): '))
-
+        self.duty = int(input(f'Enter duty cycle (0-{self.pwm_period}): '))
+        if self.duty < 0 or self.duty >= self.pwm_period:
+            raise ValueError(f'Duty cycle must be in the range [0, {self.pwm_period})')
 
         self.step_duration_ns = int(input('Enter open-loop step duration [ns]: '))
         self.step_duration_cycles = self.step_duration_ns // self.clk_period_ns

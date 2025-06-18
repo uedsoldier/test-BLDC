@@ -35,7 +35,7 @@ class PWMTest(BaseTest):
     def __init__(self):
         super().__init__('tb_pwm_generator_3phase' )
 
-        self.pwm_freq_hz = int(input("Enter PWM frequency (Hz): "))
+        self.pwm_freq_hz = int(input("Enter PWM frequency [Hz]: "))
         self.pwm_period = self.clk_freq_hz // self.pwm_freq_hz
         print(f"PWM frequency: {self.pwm_freq_hz} [Hz]")
         print(f"PWM period: {self.pwm_period} [clk cycles]")
@@ -53,6 +53,23 @@ class PWMTest(BaseTest):
             f'-DDUTY_A={self.duty_a}',
             f'-DDUTY_B={self.duty_b}',
             f'-DDUTY_C={self.duty_c}',
+            self.tb_file,
+        ]
+
+class BLDCsimpleTest(BaseTest):
+    def __init__(self):
+        super().__init__('tb_bldc_commutator')
+
+        self.step_duration_ns = int(input("Enter open-loop step duration [ns]: "))
+        self.step_duration_cycles = self.step_duration_ns // self.clk_period_ns
+        print(f"Open-loop step duration: {self.step_duration_ns} [ns] ({self.step_duration_cycles} clk cycles)")
+
+        self.iverilog_cmd = [
+            'iverilog',
+            '-o', self.output_file,
+            '-I', self.src_dir, 
+            f'-DMAIN_CLOCK_PERIOD_NS={self.clk_period_ns}',
+            f'-DSTEP_DURATION_CYCLES={self.step_duration_cycles}',
             self.tb_file,
         ]
     

@@ -70,6 +70,42 @@
             "${workspaceFolder}/sim_output/tb_hall_simulator.vcd"
         ],
         "problemMatcher": []
+        },
+
+        // BLDC open-loop tasks
+        {
+            "label": "compile-bldc-tb",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "${workspaceFolder}/scripts/bldc_build.py",
+                "tb_bldc_commutator",
+            ],
+            "problemMatcher": []
+        },
+        {
+        "label": "simulate-bldc-tb",
+        "type": "shell",
+        "dependsOn": ["compile-bldc-tb"],
+        "command": "vvp",
+        "args": [
+            "${workspaceFolder}/sim/tb_bldc_commutator.vvp"
+        ],
+        "problemMatcher": []
+        },
+        {
+        "label": "graph-bldc-tb",
+        "type": "shell",
+        "dependsOn": ["simulate-bldc-tb"],
+        "command": "cmd.exe",
+        "args": [
+            "/C",
+            "start",
+            "\"\"",
+            "gtkwave",
+            "${workspaceFolder}/sim_output/tb_bldc_commutator.vcd"
+        ],
+        "problemMatcher": []
         }
     ]
 }

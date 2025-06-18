@@ -3,19 +3,27 @@
     "VsCodeTaskButtons.tasks" : [
 
         {
-            "label": "📊 Graph PWM testbench",
+            "label": "📊 PWM testbench",
             "alignment": "left",
             "task": "graph-pwm-tb",
-            "tooltip": "Graphs the PWM testbench with gtkwave",
-            "description": "Graphs the PWM testbench using gtkwave.",
+            "tooltip": "Performs the PWM testbench.",
+            "description": "Performs the PWM testbench.",
             "color": "default"
         },
         {
-            "label": "📊 Graph Hall simulator testbench",
+            "label": "📊 Hall simulator testbench",
             "alignment": "left",
             "task": "graph-hall-tb",
-            "tooltip": "Graphs the Hall simulator testbench with gtkwave",
-            "description": "Graphs the Hall simulator testbench using gtkwave.",
+            "tooltip": "Performs the Hall simulator testbench.",
+            "description": "Performs the Hall simulator testbench.",
+            "color": "default"
+        },
+        {
+            "label": "📊 BLDC open-loop testbench",
+            "alignment": "left",
+            "task": "graph-bldc-tb",
+            "tooltip": "Performs the BLDC open-loop testbench.",
+            "description": "Performs BLDC open-loop testbench.",
             "color": "default"
         },
     ]

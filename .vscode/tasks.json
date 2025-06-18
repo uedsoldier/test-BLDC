@@ -1,68 +1,73 @@
 {
     "version": "2.0.0",
-    "inputs": [
-        {
-            "id": "tb_select",
-            "type": "pickString",
-            "description": "Select a testbench to run",
-            "options": [
-                "tb_hello",
-                "tb_pwm_generator",
-                "tb_bldc_commutator"
-
-            ]
-        },
-        {
-            "id": "main_clock_frequency_MHz",
-            "type": "promptString",
-            "description": "Enter the main clock frequency in MHz.",
-            "default": "100"
-        },
-        {
-            "id": "pwm_duty_cycle",
-            "type": "promptString",
-            "description": "Enter PWM duty cycle in cycles.",
-            "default": "50",
-        },
-        {
-            "id": "pwm_period",
-            "type": "promptString",
-            "description": "Enter PWM period in cycles.",
-            "default": "100", 
-        }
-    ],
     "tasks": [
         {
-            "label": "compile-testbench",
+            "label": "compile-pwm-tb",
             "type": "shell",
-            "command": "iverilog",
+            "command": "python",
             "args": [
-                "-o", "${workspaceFolder}/sim/${input:tb_select}.vvp",
-                "-I", "${workspaceFolder}/src", "${workspaceFolder}/testbenches/${input:tb_select}.v",
+                "${workspaceFolder}/scripts/pwm_build.py",
+                "tb_pwm_generator_3phase",
             ],
             "problemMatcher": []
         },
         {
-        "label": "simulate-testbench",
+        "label": "simulate-pwm-tb",
         "type": "shell",
-        "dependsOn": ["compile-testbench"],
+        "dependsOn": ["compile-pwm-tb"],
         "command": "vvp",
         "args": [
-            "${workspaceFolder}/sim/${input:tb_select}.vvp"
+            "${workspaceFolder}/sim/tb_pwm_generator_3phase.vvp"
         ],
         "problemMatcher": []
         },
         {
-        "label": "graph-testbench",
+        "label": "graph-pwm-tb",
         "type": "shell",
-        "dependsOn": ["simulate-testbench"],
+        "dependsOn": ["simulate-pwm-tb"],
         "command": "cmd.exe",
         "args": [
             "/C",
             "start",
             "\"\"",
             "gtkwave",
-            "${workspaceFolder}/sim_output/${input:tb_select}.vcd"
+            "${workspaceFolder}/sim_output/tb_pwm_generator_3phase.vcd"
+        ],
+        "problemMatcher": []
+        },
+
+        // Hall simulator tasks
+        {
+            "label": "compile-hall-tb",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "${workspaceFolder}/scripts/hall_build.py",
+                "tb_hall_simulator",
+            ],
+            "problemMatcher": []
+        },
+        {
+        "label": "simulate-hall-tb",
+        "type": "shell",
+        "dependsOn": ["compile-hall-tb"],
+        "command": "vvp",
+        "args": [
+            "${workspaceFolder}/sim/tb_hall_simulator.vvp"
+        ],
+        "problemMatcher": []
+        },
+        {
+        "label": "graph-hall-tb",
+        "type": "shell",
+        "dependsOn": ["simulate-hall-tb"],
+        "command": "cmd.exe",
+        "args": [
+            "/C",
+            "start",
+            "\"\"",
+            "gtkwave",
+            "${workspaceFolder}/sim_output/tb_hall_simulator.vcd"
         ],
         "problemMatcher": []
         }

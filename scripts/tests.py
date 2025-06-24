@@ -163,3 +163,20 @@ class BLDCPWMHallTest(BaseTest):
             f'-DHALL_SENSOR_STROBE_DURATION_CLK={self.hall_simulated_strobe_duration_clk}',
             self.tb_file,
         ]
+
+class DigitalFilterTest(BaseTest):
+    def __init__(self, tb_name):
+        super().__init__(tb_name)
+
+        self.filter_len = int(input('Enter filter length in clock cycles: '))
+        if self.filter_len <= 0:
+            raise ValueError('Filter length must be greater than 0')
+
+        self.iverilog_cmd = [
+            'iverilog',
+            '-o', self.output_file,
+            '-I', self.src_dir,
+            f'-DMAIN_CLOCK_PERIOD_NS={self.clk_period_ns}',
+            f'-DFILTER_LEN={self.filter_len}',
+            self.tb_file,
+        ]

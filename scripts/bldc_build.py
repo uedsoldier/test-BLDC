@@ -1,5 +1,5 @@
 from tests import BLDCsimpleTest
 
-bldc_opneloop = BLDCsimpleTest('tb_bldc_commutator')
+bldc_openloop = BLDCsimpleTest('tb_bldc_commutator')
 # Ejecutar comando iverilog
-bldc_opneloop.build()
+bldc_openloop.build()

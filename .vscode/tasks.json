@@ -179,5 +179,41 @@
         ],
         "problemMatcher": []
         },
+
+        // Digital filter tasks
+        {
+            "label": "compile-digital-filter-tb",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "${workspaceFolder}/scripts/digital_filter_build.py",
+                "tb_digital_filter",
+            ],
+            "problemMatcher": []
+        },
+        {
+        "label": "simulate-digital-filter-tb",
+        "type": "shell",    
+        "dependsOn": ["compile-digital-filter-tb"],
+        "command": "vvp",
+        "args": [
+            "${workspaceFolder}/sim/tb_digital_filter.vvp"
+        ],
+        "problemMatcher": []
+        },
+        {
+        "label": "graph-digital-filter-tb",
+        "type": "shell",
+        "dependsOn": ["simulate-digital-filter-tb"],
+        "command": "cmd.exe",
+        "args": [
+            "/C",
+            "start",
+            "\"\"",
+            "gtkwave",
+            "${workspaceFolder}/sim_output/tb_digital_filter.vcd"
+        ],
+        "problemMatcher": []
+        },
     ]
 }

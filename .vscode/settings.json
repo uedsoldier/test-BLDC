@@ -40,6 +40,14 @@
             "tooltip": "Performs the BLDC with PWM and Hall testbench.",
             "description": "Performs the BLDC with PWM and Hall testbench.",
             "color": "default"
-        }
+        },
+        {
+            "label": "📊 Digital filter testbench",
+            "alignment": "left",
+            "task": "graph-digital-filter-tb",
+            "tooltip": "Performs the Digital filter testbench.",
+            "description": "Performs the Digital filter testbench.",
+            "color": "default"
+        },
     ]
     }
